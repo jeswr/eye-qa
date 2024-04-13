@@ -1,7 +1,8 @@
 import { n3reasoner } from 'eyereasoner';
+import { shapeFromDataset } from './shapeFromDataset';
 
-interface CallbackRegister {
+// interface CallbackRegister {
 
-}
+// }
 
-export default {};
+// export default {};

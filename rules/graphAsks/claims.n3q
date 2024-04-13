@@ -4,7 +4,7 @@
 @prefix fno: <https://w3id.org/function/ontology#> .
 
 {
-    ?s log:contains ?o .
+    ?s log:ctn ?o .
 } <= {
-    @ex:FetchExectionShape log:graphAsk ?o .
+    @ex:FetchExectionShape(?s) log:graphAsk ?o .
 } .

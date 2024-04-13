@@ -9,5 +9,5 @@ shape ex:FetchShape {
 
 shape ex:FetchExectionShape -> fno:Execution {
     fno:executes hasValue=ex:fetch [1..1] .
-    ex:source xsd:string [1..1] .
+    ex:source IRI [1..1] .
 }

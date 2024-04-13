@@ -2,9 +2,7 @@
 @prefix string: <http://www.w3.org/2000/10/swap/string#>.
 
 {
-    ?s log:graphAsk ?o .
+    ?s log:graphAskSingleOutput ?o .
 } <= {
-    (?s) string:concatenation ?c .
-    ?c log:ask ?res .
-    ?res log:parsedAsN3 ?o .
+    ?s log:graphAsk { log:result log:is ?o . } .
 } .

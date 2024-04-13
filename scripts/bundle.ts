@@ -32,6 +32,7 @@ function getPrefixes(content: string) {
 }
 
 async function main() {
+    const tempFiles: string[] = [];
     const shapes = await dereferenceFolder(path.join(__dirname, '..', 'shapes'));
 
     // GENERATE n3 from n3q
@@ -58,13 +59,15 @@ async function main() {
 
                 contents = contents.replace(match, '{\n' + await write([...replacementStore]) + '\n}');
             }
-            fs.writeFileSync(filePath.replace('.n3q', '.n3'), contents);
+            const fileToWrite = filePath.replace('.n3q', '.n3');
+            tempFiles.push(fileToWrite);
+            fs.writeFileSync(fileToWrite, contents);
         }
     }
     // FINISH GENERATE n3 from n3q
 
     // GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
-    const rulesQuads = await dereferenceFolder(path.join(__dirname, '..', 'rules'));
+    const rulesQuads = await dereferenceFolder(folder);
 
     const rules =  await write([...rulesQuads.store], {
         format: 'text/n3',
@@ -73,6 +76,11 @@ async function main() {
     })
     fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default "${rules}"`);
     // FINISH GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
+
+    // Remove temporary n3 files
+    for (const file of tempFiles) {
+        fs.rmSync(file);
+    }
 }
 
 main()

@@ -1,0 +1,13 @@
+PREFIX fno: <https://w3id.org/function/ontology#>
+PREFIX cert: <http://www.w3.org/ns/auth/cert#>
+PREFIX ex: <http://example.org/>
+
+shape ex:FetchShape {
+    ex:execution @ex:FetchExectionShape [1..1] .
+    ex:result @ex:FetchOutputShape [1..1] .
+}
+
+shape ex:FetchExectionShape -> fno:Execution {
+    fno:executes hasValue=ex:fetch [1..1] .
+    ex:source xsd:string [1..1] .
+}

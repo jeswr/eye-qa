@@ -1,0 +1,10 @@
+@prefix ex: <http://example.org/> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#>.
+@prefix fno: <https://w3id.org/function/ontology#> .
+
+{
+    ?s log:contains ?o .
+} <= {
+    @ex:FetchExectionShape log:graphAsk ?o .
+} .

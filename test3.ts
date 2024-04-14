@@ -3,6 +3,7 @@ import { Store, Parser } from 'n3';
 import { shapeMatches } from './lib/shapeFromDataset';
 import { FetchExectionShapeShapeType } from './ldo/executions.shapeTypes';
 import quads from './lib/rules';
+import { removeSlashes } from 'slashes';
 
 
 
@@ -10,6 +11,8 @@ const hadnlers: [] = []
 
 const q = `@prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+@prefix ex: <http://example.org/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
 @prefix : <http://example.org/ns#>.
 
 {
@@ -21,13 +24,13 @@ const q = `@prefix log: <http://www.w3.org/2000/10/swap/log#>.
 } .
 
 {
-    :p :o ?o .
+    ?s :o ?o .
 } <= {
-    { <http://example.org/ns/2#a> <http://example.org/ns/2#b> <http://example.org/ns/2#c> } log:graphAsk [ log:includes { :a :b ?o } ] .
+    { <urn:skolem:bf17a504-4d2d-476e-b5ef-66a5157b20a0> a fno:Execution ;fno:executes ex:fetch ;ex:source ?s . } log:graphAsk [ log:includes { ?s :b ?o } ] .
 } .
 
 {
-    :p :o ?o .
+    <http://example.org/ns#a> :o ?o .
 } log:query {
     :result :is ?o .
 }.
@@ -39,16 +42,16 @@ async function main() {
         cb: async (quads) => {
             // Note that true === {} / the emtpy graph
             console.log(quads.slice(1, -1));
-            const store = quads === 'true' ? new Store() : new Store(new Parser().parse(quads.slice(3, -3)));
-            for (const m of shapeMatches(FetchExectionShapeShapeType, store)) {
-                console.log(m.source);
-            }
+            // const store = quads === 'true' ? new Store() : new Store(new Parser().parse(removeSlashes(quads).slice(3, -3)));
+            // for (const m of shapeMatches(FetchExectionShapeShapeType, store)) {
+            //     console.log(m.source);
+            // }
             // return '{ <http://example.org/my/source> <http://example.org/contains> << <http://example.org/my/a> <http://example.org/b> <http://example.org/my/c> >>, << <http://example.org/my/a> <http://example.org/b> <http://example.org/my/c2> >> . }';
             // Below working
             // return '{ <http://example.org/my/source> <http://example.org/contains> << <http://example.org/my/a> <http://example.org/b> <http://example.org/my/c2> >> . }';
             // return '<http://example.org/my/source> <http://example.org/contains> << <http://example.org/my/a> <http://example.org/b> <http://example.org/my/c2> >> .';
             // console.log(store)
-            return '{ <http://example.org/ns#a> <http://example.org/ns#b> <http://example.org/ns/2#c> . }'
+            return '{ <http://example.org/ns#a> <http://example.org/ns#b> <http://example.org/ns/2#c>, <http://example.org/ns/2#c2> . }'
             // return "{ @prefix : <http://example.org/ns#>.\n :a :b 1, 2. }";
             // This is not working
             // return `{

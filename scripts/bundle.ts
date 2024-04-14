@@ -80,14 +80,8 @@ async function main() {
         prefixes: rulesQuads.prefixes,
         compact: true,
         isImpliedBy: true,
-    })
+    });
 
-    console.log(await write([...rulesQuads.store], {
-        format: 'text/n3',
-        prefixes: rulesQuads.prefixes,
-        // compact: true,
-        isImpliedBy: true,
-    }));
     fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default "${rules}"`);
     // FINISH GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
 

@@ -6,5 +6,5 @@
 {
     ?s log:ctn ?o .
 } <= {
-    @ex:FetchExectionShape(?s) log:graphAsk ?o .
+    @ex:FetchExectionShape(?s) log:graphAsk [ log:includes { ?s ex:contains ?o } ] .
 } .

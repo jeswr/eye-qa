@@ -37,9 +37,11 @@
     "@jeswr/shacl2shex": "^1.1.0",
     "@ldo/cli": "^0.0.1-alpha.24",
     "@ldo/ldo": "^0.0.1-alpha.24",
+    "@rdfjs/types": "^1.1.0",
     "@types/jest": "^29.2.6",
     "@types/n3": "^1.16.4",
     "@types/rdfjs__term-set": "^2.0.9",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
@@ -49,6 +51,7 @@
     "n3": "github:rdfjs/N3.js#fd6e7f1d5982fa113349a6ad03ad99e52db898d7",
     "pre-commit": "^1.2.2",
     "semantic-release": "^20.0.3",
+    "slashes": "^3.0.12",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^4.9.4"
@@ -99,8 +102,9 @@
   "dependencies": {
     "@rdfjs/term-set": "^1.1.0",
     "@shexjs/neighborhood-rdfjs": "^1.0.0-alpha.29",
-    "eyereasoner": "^16.0.0",
+    "eyereasoner": "^16.0.2",
     "rdf-dereference-store": "^1.0.0",
-    "rdf-namespaces": "^1.12.0"
+    "rdf-namespaces": "^1.12.0",
+    "uuid": "^9.0.1"
   }
 }

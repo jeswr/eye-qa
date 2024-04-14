@@ -4,6 +4,7 @@ import dereference from 'rdf-dereference-store';
 import { Store, DataFactory, Quad_Predicate } from 'n3';
 import { rdf } from 'rdf-namespaces';
 import { write } from '@jeswr/pretty-turtle';
+import { v4 } from 'uuid';
 const { blankNode, namedNode, quad, variable } =  DataFactory;
 
 let i = 0;
@@ -46,7 +47,9 @@ async function main() {
                 console.log(match);
                 const shape = prefixes[match.split(':')[0].slice(1)] + match.split(':')[1].split('(')[0];
                 
-                const bn = blankNode();
+                // const bn = blankNode();
+                // USING A namedNode here rather than a blank node because eye complained
+                const bn = namedNode(`urn:skolem:${v4()}`)
                 const replacementStore = new Store([
                     quad(bn, namedNode(rdf.type), namedNode('https://w3id.org/function/ontology#Execution')),
                 ]);
@@ -63,13 +66,14 @@ async function main() {
             const fileToWrite = filePath.replace('.n3q', '.n3');
             tempFiles.push(fileToWrite);
             fs.writeFileSync(fileToWrite, contents);
+            console.log(contents);
         }
     }
     // FINISH GENERATE n3 from n3q
 
     // GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
     const rulesQuads = await dereferenceFolder(folder);
-    console.log(...rulesQuads.store)
+    // console.log(...rulesQuads.store)
 
     const rules =  await write([...rulesQuads.store], {
         format: 'text/n3',
@@ -77,6 +81,13 @@ async function main() {
         compact: true,
         isImpliedBy: true,
     })
+
+    console.log(await write([...rulesQuads.store], {
+        format: 'text/n3',
+        prefixes: rulesQuads.prefixes,
+        // compact: true,
+        isImpliedBy: true,
+    }));
     fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default "${rules}"`);
     // FINISH GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
 

@@ -1,0 +1,3 @@
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+<http://localhost:3000/> cert:key "key-1" .

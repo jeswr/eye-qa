@@ -1,0 +1,12 @@
+@prefix ex: <http://example.org/> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#>.
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+# Always believe a documents claims about its own public key
+{
+    ?s cert:key ?o .
+} <= {
+    ?s log:contains <<?s cert:key ?o>> .
+} .

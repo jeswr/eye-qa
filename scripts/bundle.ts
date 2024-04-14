@@ -5,7 +5,7 @@ import { Store, DataFactory, Quad_Predicate } from 'n3';
 import { rdf } from 'rdf-namespaces';
 import { write } from '@jeswr/pretty-turtle';
 import { v4 } from 'uuid';
-const { blankNode, namedNode, quad, variable } =  DataFactory;
+const { namedNode, quad, variable } =  DataFactory;
 
 let i = 0;
 

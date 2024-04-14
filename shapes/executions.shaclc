@@ -11,3 +11,8 @@ shape ex:FetchExectionShape -> fno:Execution {
     fno:executes hasValue=ex:fetch [1..1] .
     ex:source IRI [1..1] .
 }
+
+shape ex:SignatureVerificationExectionShape -> fno:Execution {
+    fno:executes hasValue=ex:signautureVerification [1..1] .
+    ex:source IRI [1..1] .
+}

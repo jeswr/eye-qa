@@ -4,7 +4,5 @@
 {
     ?s log:graphAsk ?o .
 } <= {
-    (?s) string:concatenation ?c .
-    ?c log:ask ?res .
-    ?res log:parsedAsN3 ?o .
+    (?s)!string:concatenation log:ask [log:parsedAsN3 ?o] .
 } .

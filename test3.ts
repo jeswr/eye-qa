@@ -4,6 +4,7 @@ import { shapeMatches } from './lib/shapeFromDataset';
 import { FetchExectionShapeShapeType } from './ldo/executions.shapeTypes';
 import quads from './lib/rules';
 import { removeSlashes } from 'slashes';
+import { write } from "@jeswr/pretty-turtle";
 
 
 
@@ -38,10 +39,16 @@ const q = `@prefix log: <http://www.w3.org/2000/10/swap/log#>.
 `
 
 async function main() {
-    const r = await n3reasoner(q, undefined, {
+
+
+
+    const r = await n3reasoner(await write([...new Parser({ format: 'text/n3' }).parse(q)], {
+        format: 'text/n3',
+        isImpliedBy: true
+    }), undefined, {
         cb: async (quads) => {
             // Note that true === {} / the emtpy graph
-            console.log(quads.slice(1, -1));
+            // console.log(quads.slice(1, -1));
             // const store = quads === 'true' ? new Store() : new Store(new Parser().parse(removeSlashes(quads).slice(3, -3)));
             // for (const m of shapeMatches(FetchExectionShapeShapeType, store)) {
             //     console.log(m.source);

@@ -1,4 +1,6 @@
-import { LdoBase, ShapeType, createLdoDataset, getDataset } from '@ldo/ldo';
+import {
+  LdoBase, ShapeType, createLdoDataset, getDataset,
+} from '@ldo/ldo';
 import { DatasetCore, NamedNode, BlankNode } from '@rdfjs/types';
 import RdfJsDb from '@shexjs/neighborhood-rdfjs';
 import { ShExValidator } from '@shexjs/validator';

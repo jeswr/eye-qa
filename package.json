@@ -14,8 +14,8 @@
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test": "ts-node __tests__/tempTest.ts",
-    "lint": "eslint lib/* __tests__/* --ext .ts",
-    "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
+    "lint": "eslint lib/* __tests__/*.ts --ext .ts",
+    "lint:fix": "eslint lib/* __tests__/*.ts --ext .ts --fix",
     "build": "ts-node scripts/bundle && npm run shapes && tsc",
     "prepare": "npm run build",
     "shapes": "shacl2shex shapes/ && ldo build --input ./shapes --output ./lib/ldo && rm -rf ./shapes/*.shex && rm -rf ./shapes/**/*.shex",
@@ -36,7 +36,6 @@
     "@jeswr/pretty-turtle": "^1.5.0",
     "@jeswr/shacl2shex": "^1.1.0",
     "@ldo/cli": "^0.0.1-alpha.24",
-    "@ldo/ldo": "^0.0.1-alpha.24",
     "@rdfjs/types": "^1.1.0",
     "@types/jest": "^29.2.6",
     "@types/n3": "^1.16.4",
@@ -103,6 +102,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@ldo/ldo": "^0.0.1-alpha.24",
     "@rdfjs/term-set": "^1.1.0",
     "@shexjs/neighborhood-rdfjs": "^1.0.0-alpha.29",
     "eyereasoner": "^16.0.2",

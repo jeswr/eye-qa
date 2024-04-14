@@ -2,7 +2,7 @@
 @prefix ex: <http://example.org/> .
 
 {
-    <http://localhost:3000/> log:ctn ?Y.
+    <http://localhost:3000/> log:contains ?Y.
 } log:query {
     ex:result ex:is ?Y .
 }.

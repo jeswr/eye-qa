@@ -11,8 +11,8 @@ export async function reason(query: Iterable<Quad>) {
 
   // For some reason that I dont want to debug right now the
   // n3reasoner serialiser isn't resulting in what we want
-  return n3reasoner(await write([...quads, ...query], { format: 'text/n3' }), undefined, {
-    cb: (quads) => handler.handleCallback(quads),
+  return n3reasoner(await write([...quads, ...query], { format: 'text/n3', isImpliedBy: true }), undefined, {
+    cb: (cbQuads) => handler.handleCallback(cbQuads),
     output: 'deductive_closure',
     outputType: 'quads',
   });

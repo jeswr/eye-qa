@@ -10,9 +10,11 @@ export class DatasetHandler {
   // TODO: REMOVE THESE ANYS
   private handlers: Record<string, {
     shape: ShapeType<any>,
+    // eslint-disable-next-line no-unused-vars
     handler: (data: any) => Promise<DatasetCore>
   }> = {};
 
+  // eslint-disable-next-line no-unused-vars
   register<T extends LdoBase>(shape: ShapeType<T>, handler: (data: T) => Promise<DatasetCore>) {
     if (shape.shape in this.handlers) {
       throw new Error('Shape already registered');
@@ -22,19 +24,22 @@ export class DatasetHandler {
 
   registerShaped<T extends LdoBase, K extends LdoBase>(
     shape: ShapeType<T>,
-    outShape: ShapeType<K>, handler: (data: T) => Promise<K>
-) {
+    outShape: ShapeType<K>,
+    // eslint-disable-next-line no-unused-vars
+    handler: (data: T) => Promise<K>,
+  ) {
     if (shape.shape in this.handlers) {
       throw new Error('Shape already registered');
     }
     this.handlers[shape.shape] = {
-        shape,
-        handler: async (data) => datasetFromShape(outShape, await handler(data)) 
+      shape,
+      handler: async (data) => datasetFromShape(outShape, await handler(data)),
     };
   }
 
   async handleDataset(store: DatasetCore): Promise<DatasetCore> {
     for (const { shape, handler } of Object.values(this.handlers)) {
+      // eslint-disable-next-line no-unreachable-loop
       for (const match of shapeMatches(shape, store)) {
         return handler(match);
       }

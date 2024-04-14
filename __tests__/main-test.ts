@@ -3,10 +3,13 @@ import path from 'path';
 import 'jest-rdf';
 import { reason } from '../lib';
 
-globalThis.fetch = async () => new Response('<http://example.org/a> <http://example.org/b> 1, 2 .', {
-  status: 200,
-  headers: new Headers([['Content-Type', 'text/turtle']]),
-});
+globalThis.fetch = async () => {
+  console.log('fetch called');
+  return new Response('<http://example.org/a> <http://example.org/b> 1, 2 .', {
+    status: 200,
+    headers: new Headers([['Content-Type', 'text/turtle']]),
+  });
+};
 
 it('should run', async () => {
   expect(

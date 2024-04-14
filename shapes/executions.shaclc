@@ -12,7 +12,7 @@ shape ex:FetchExectionShape -> fno:Execution {
     ex:source IRI [1..1] .
 }
 
-shape ex:SignatureVerificationExectionShape -> fno:Execution {
-    fno:executes hasValue=ex:signautureVerification [1..1] .
-    ex:source IRI [1..1] .
+shape ex:RDFCHashExectionShape -> fno:Execution {
+    fno:executes hasValue=ex:rdfcHash [1..1] .
+    ex:contents BlankNode [1..1] .
 }

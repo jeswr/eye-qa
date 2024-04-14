@@ -19,7 +19,7 @@ const prefixes = {
 };
 
 async function main() {
-  for (const [query, resultPath] of [['query.n3', 'result.n3'], ['queryKey.n3', 'resultKey.n3']]) {
+  for (const [query, resultPath] of [['query.n3', 'result.n3'], ['queryKey.n3', 'resultKey.n3'], ['queryHash.n3', 'resultHash.n3']]) {
     const { store } = await dereferenceToStore(path.join(__dirname, query), { localFiles: true });
     const { store: resultStore } = await dereferenceToStore(
       path.join(__dirname, resultPath),

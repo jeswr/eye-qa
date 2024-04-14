@@ -100,6 +100,7 @@
   },
   "dependencies": {
     "@jeswr/pretty-turtle": "^1.5.0",
+    "@jeswr/rdfjs-sign": "^1.2.0",
     "@ldo/ldo": "^0.0.1-alpha.24",
     "@rdfjs/term-set": "^1.1.0",
     "@shexjs/neighborhood-rdfjs": "^1.0.0-alpha.29",

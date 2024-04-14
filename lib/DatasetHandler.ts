@@ -11,11 +11,14 @@ export class DatasetHandler {
   private handlers: Record<string, {
     shape: ShapeType<any>,
     // eslint-disable-next-line no-unused-vars
-    handler: (data: any) => Promise<DatasetCore>
+    handler: (data: any, dataset?: DatasetCore) => Promise<DatasetCore>
   }> = {};
 
-  // eslint-disable-next-line no-unused-vars
-  register<T extends LdoBase>(shape: ShapeType<T>, handler: (data: T) => Promise<DatasetCore>) {
+  register<T extends LdoBase>(
+    shape: ShapeType<T>,
+    // eslint-disable-next-line no-unused-vars
+    handler: (data: T, dataset?: DatasetCore) => Promise<DatasetCore>,
+  ) {
     if (shape.shape in this.handlers) {
       throw new Error('Shape already registered');
     }
@@ -41,14 +44,14 @@ export class DatasetHandler {
     for (const { shape, handler } of Object.values(this.handlers)) {
       // eslint-disable-next-line no-unreachable-loop
       for (const match of shapeMatches(shape, store)) {
-        return handler(match);
+        return handler(match, store);
       }
     }
     throw new Error('No handler found');
   }
 
   async handleCallback(quads: string): Promise<string> {
-    const store = new Store(new Parser().parse(removeSlashes(quads).slice(1, -1)));
+    const store = new Store(new Parser({ format: 'text/n3' }).parse(removeSlashes(quads).slice(1, -1)));
     return `{\n${await write([...await this.handleDataset(store)], { format: 'text/n3' })}\n}`;
   }
 }

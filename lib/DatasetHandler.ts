@@ -1,7 +1,7 @@
 import { write } from '@jeswr/pretty-turtle';
 import { LdoBase, ShapeType } from '@ldo/ldo';
 import { DatasetCore } from "@rdfjs/types";
-import { DataFactory, Parser, Store } from 'n3';
+import { Parser, Store } from 'n3';
 import { removeSlashes } from 'slashes';
 import { datasetFromShape, shapeMatches } from './shapeFromDataset';
 
@@ -24,7 +24,7 @@ export class DatasetHandler {
         this.handlers[shape.shape] = { shape, handler: async (data) => datasetFromShape(outShape, await handler(data)) };
     }
 
-    handleDataset(store: DatasetCore): Promise<DatasetCore> {
+    async handleDataset(store: DatasetCore): Promise<DatasetCore> {
         for (const { shape, handler } of Object.values(this.handlers)) {
             for (const match of shapeMatches(shape, store)) {
                 return handler(match);

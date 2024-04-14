@@ -66,7 +66,6 @@ async function main() {
             const fileToWrite = filePath.replace('.n3q', '.n3');
             tempFiles.push(fileToWrite);
             fs.writeFileSync(fileToWrite, contents);
-            console.log(contents);
         }
     }
     // FINISH GENERATE n3 from n3q

@@ -1,1 +1,0 @@
-{\n    <urn:skolem:bf17a504-4d2d-476e-b5ef-66a5157b20a0> a <https://w3id.org/function/ontology#Execution>.\n    <urn:skolem:bf17a504-4d2d-476e-b5ef-66a5157b20a0> <https://w3id.org/function/ontology#executes> <http://example.org/fetch>.\n    <urn:skolem:bf17a504-4d2d-476e-b5ef-66a5157b20a0> <http://example.org/source> <http://example.org/my/source>.\n}

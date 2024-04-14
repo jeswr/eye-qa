@@ -1,8 +1,8 @@
 import { DataFactory, Store } from 'n3';
 import dereference from 'rdf-dereference-store';
 import { Handler } from '../types';
-import { FetchExectionShapeShapeType } from '../../ldo/executions.shapeTypes';
-import { FetchExectionShape } from '../../ldo/executions.typings';
+import { FetchExectionShapeShapeType } from '../ldo/executions.shapeTypes';
+import { FetchExectionShape } from '../ldo/executions.typings';
 const { namedNode, quad } = DataFactory;
 
 export const fetchHander: Handler<FetchExectionShape> = {

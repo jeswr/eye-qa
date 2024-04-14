@@ -45,6 +45,7 @@ export function* shapeMatches<T extends LdoBase>(shapeType: ShapeType<T>, datase
     try {
       yield shapeFromDataset(shapeType, dataset, subject);
     } catch (e) {
+      console.error(e);
       // Do nothing, not all subjects will match every shape
     }
   }

@@ -5,6 +5,8 @@ import { Store, DataFactory, Quad_Predicate } from 'n3';
 import { rdf } from 'rdf-namespaces';
 import { write } from '@jeswr/pretty-turtle';
 import { v4 } from 'uuid';
+// @ts-ignore
+import { double } from 'quote-unquote';
 const { namedNode, quad, variable } =  DataFactory;
 
 let i = 0;
@@ -43,10 +45,21 @@ async function main() {
             const filePath = path.join(file.path, file.name);
             let contents = fs.readFileSync(path.join(file.path, file.name), 'utf-8');
             const prefixes = getPrefixes(contents);
-            for (const [match] of contents.matchAll(/\@[a-z]+\:[a-z]+\(\?[a-z]+\)/ig)) {
+            
+            for (const [match] of contents.matchAll(/\@[a-z]+\:[a-z]+\([^\)]+\)/ig)) {
                 console.log(match);
                 const shape = prefixes[match.split(':')[0].slice(1)] + match.split(':')[1].split('(')[0];
-                
+                const varContents = match.split('(')[1].split(')')[0];
+
+                let variableMapping: Record<string, string> | undefined = undefined;
+                if (varContents.includes(',')) {
+                    variableMapping = {};
+                    for (const elem of varContents.split(', ')) {
+                        const [key, value] = elem.split(' ?');
+                        variableMapping = { ...variableMapping, [prefixes[key.split(':')[0]] + key.split(':')[1]]: value };
+                    }
+                }
+
                 // const bn = blankNode();
                 // USING A namedNode here rather than a blank node because eye complained
                 const bn = namedNode(`urn:skolem:${v4()}`)
@@ -57,12 +70,12 @@ async function main() {
                 for (const property of shapes.store.getObjects(shape, 'http://www.w3.org/ns/shacl#property', null)) {
                     for (const path of shapes.store.getObjects(property, 'http://www.w3.org/ns/shacl#path', null)) {
                         const value = shapes.store.getObjects(property, 'http://www.w3.org/ns/shacl#hasValue', null);
-                        replacementStore.addQuad(bn, path as Quad_Predicate, value.length === 1 ? value[0] : variable(match.split('(?')[1].split(')')[0]));
-                    }
+                        replacementStore.addQuad(bn, path as Quad_Predicate, value.length === 1 ? value[0] : variable((variableMapping ? variableMapping[path.value] : match.split('(?')[1].split(')')[0])));                    }
                 }
 
                 contents = contents.replace(match, '{\n' + await write([...replacementStore]) + '\n}');
             }
+
             const fileToWrite = filePath.replace('.n3q', '.n3');
             tempFiles.push(fileToWrite);
             fs.writeFileSync(fileToWrite, contents);
@@ -81,7 +94,7 @@ async function main() {
         isImpliedBy: true,
     });
 
-    fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default "${rules}"`);
+    fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default ${double(rules)}`);
     // FINISH GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
 
     // Remove temporary n3 files

@@ -14,6 +14,7 @@
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test": "ts-node __tests__/tempTest.ts",
+    "test:update": "npm t -- -u",
     "lint": "eslint lib/*.ts lib/handlers/*.ts __tests__/*.ts --ext .ts",
     "lint:fix": "eslint lib/*.ts lib/handlers/*.ts  __tests__/*.ts --ext .ts --fix",
     "build": "ts-node scripts/bundle && npm run shapes && tsc",

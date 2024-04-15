@@ -74,7 +74,6 @@ async function main() {
                 }
 
                 contents = contents.replace(match, '{\n' + await write([...replacementStore]) + '\n}');
-                console.log(contents)
             }
 
             const fileToWrite = filePath.replace('.n3q', '.n3');

@@ -1,0 +1,14 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix ex: <http://example.org/> .
+
+{
+   ex:a ex:b ex:c .
+   ex:a1 ex:b1 ex:c1 .
+}
+ex:assertedBy <http://localhost:3000/> .
+
+{
+    <http://localhost:3000/> ex:asserts ?Y.
+} log:query {
+    <http://localhost:3000/> ex:asserts ?Y.
+}.

@@ -1,8 +1,10 @@
 /* eslint-disable no-console, no-await-in-loop */
 import dereferenceToStore from 'rdf-dereference-store';
+import * as fs from 'fs';
 import path from 'path';
 import { isomorphic } from 'rdf-isomorphic';
 import { write } from '@jeswr/pretty-turtle';
+import { Store } from 'n3';
 import { reason } from '../lib';
 
 globalThis.fetch = async () => new Response(
@@ -13,32 +15,31 @@ globalThis.fetch = async () => new Response(
   },
 );
 
-const prefixes = {
-  cert: 'http://www.w3.org/ns/auth/cert#',
-  ex: 'http://example.org/',
-};
-
 async function main() {
-  for (const [query, resultPath] of [
-    ['query.n3', 'result.n3'],
-    ['queryKey.n3', 'resultKey.n3'],
-    ['queryHash.n3', 'resultHash.n3'],
-    ['querySignature.n3', 'resultSignature.n3'],
-  ]) {
-    const { store } = await dereferenceToStore(path.join(__dirname, query), { localFiles: true });
+  for (const query of fs.readdirSync(path.join(__dirname, 'queries'))) {
+    console.log(`Running ${query}`);
+    const { store, prefixes } = await dereferenceToStore(path.join(__dirname, 'queries', query), { localFiles: true });
     const { store: resultStore } = await dereferenceToStore(
-      path.join(__dirname, resultPath),
+      path.join(__dirname, 'results', query),
       { localFiles: true },
-    );
+    ).catch(() => ({ store: new Store() }));
     const result = await reason(store);
 
     if (!isomorphic(result, [...resultStore])) {
-      console.error(`Failed on ${query}`);
-      console.error('=================', 'EXPECTED', '=================');
-      console.error(await write([...resultStore], { prefixes, format: 'text/n3' }));
-      console.error('=================', 'RECIEVED', '=================');
-      console.error(await write(result, { prefixes, format: 'text/n3' }));
-      process.exit(1);
+      if (process.argv.includes('-u')) {
+        console.warn(`Updating ${query}`);
+        fs.writeFileSync(
+          path.join(__dirname, 'results', query),
+          await write([...result], { prefixes, format: 'text/n3' }),
+        );
+      } else {
+        console.error(`Failed on ${query}`);
+        console.error('=================', 'EXPECTED', '=================');
+        console.error(await write([...resultStore], { prefixes, format: 'text/n3' }));
+        console.error('=================', 'RECIEVED', '=================');
+        console.error(await write(result, { prefixes, format: 'text/n3' }));
+        process.exit(1);
+      }
     }
   }
 }

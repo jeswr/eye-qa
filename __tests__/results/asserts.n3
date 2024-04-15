@@ -1,0 +1,12 @@
+@prefix ex: <http://example.org/> .
+
+<http://localhost:3000/> ex:asserts <<ex:a ex:b ex:c>>, 
+    <<ex:a1 ex:b1 ex:c1>> .
+
+{
+  ex:a ex:b ex:c .
+
+  ex:a1 ex:b1 ex:c1 .
+
+  
+} ex:assertedBy <http://localhost:3000/> .

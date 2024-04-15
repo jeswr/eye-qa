@@ -1,0 +1,18 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix graph: <http://www.w3.org/2000/10/swap/graph#>.
+@prefix ex: <http://example.org/> .
+@prefix : <http://example.org/#>.
+
+:s ex:asserts <<:a :b :c>>, <<:d :e :f>>.
+
+{   
+    ?s :graphP ?G.
+} <= {
+    ({?S ?P ?O} {?s ex:asserts <<?S ?P ?O>>} ?LIST) log:collectAllIn ?SCOPE.
+    ?G graph:list ?LIST.
+} .
+
+{   :s :graphP ?G.
+} log:query {
+    :s :graphP ?G.
+} .

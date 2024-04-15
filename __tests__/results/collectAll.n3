@@ -1,0 +1,11 @@
+@prefix ex: <http://example.org/> .
+@prefix : <http://example.org/#> .
+
+:s ex:asserts <<:a :b :c>>, 
+    <<:d :e :f>> ;
+  :graphP {
+    :a :b :c .
+
+    :d :e :f .
+    
+  } .

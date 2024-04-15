@@ -2,16 +2,18 @@
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
 @prefix string: <http://www.w3.org/2000/10/swap/string#>.
 @prefix fno: <https://w3id.org/function/ontology#> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
 
 {
     ?dataset ex:assertedBy ?issuer .
 } <= {
     ?dataset ex:signature [
-            ex:issuer [ cert:key ?pubKey ] ;
+            ex:issuer ?issuer ;
             ex:signatureValue ?signature ;
         ] ;
         log:rdfc10hash ?hash .
 
     ?issuer cert:key ?pubKey .
-    @ex:RDFCHashExectionShape(?s) log:graphAskSingleOutput ?o .
+
+    @ex:SignatureValidationExectionShape(ex:signature ?signature, cert:key ?pubKey, ex:contents ?dataset) log:graphAskSingleOutput { log:result log:is true . } .
 } .

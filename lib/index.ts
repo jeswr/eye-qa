@@ -3,7 +3,7 @@ import { Quad } from '@rdfjs/types';
 import { n3reasoner } from 'eyereasoner';
 import { DataFactory, Store } from 'n3';
 import { hashDataGraph } from '@jeswr/rdfjs-sign';
-import { RDFCHashExectionShapeShapeType } from './ldo/executions.shapeTypes';
+import { RDFCHashExectionShapeShapeType, SignatureValidationExectionShapeShapeType } from './ldo/executions.shapeTypes';
 import { DatasetHandler } from './DatasetHandler';
 import { fetchHander } from './handlers';
 import quads from './rules';
@@ -29,6 +29,15 @@ export async function reason(query: Iterable<Quad>) {
       quad(namedNode('http://www.w3.org/2000/10/swap/log#result'), namedNode('http://www.w3.org/2000/10/swap/log#is'), literal(
         Buffer.from(await hashDataGraph(yieldQuads())).toString('utf8'),
       )),
+    ]);
+  });
+  handler.register(SignatureValidationExectionShapeShapeType, async (shape, dataset) => {
+    if (!dataset) {
+      throw new Error('No dataset provided');
+    }
+    console.log('SignatureValidationExectionShapeShapeType', shape, dataset);
+    return new Store([
+      quad(namedNode('http://www.w3.org/2000/10/swap/log#result'), namedNode('http://www.w3.org/2000/10/swap/log#is'), literal('true', namedNode('http://www.w3.org/2001/XMLSchema#boolean'))),
     ]);
   });
 

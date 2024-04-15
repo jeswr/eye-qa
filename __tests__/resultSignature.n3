@@ -1,0 +1,8 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix ex: <http://example.org/> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+{
+    ex:a ex:b ex:c .
+    ex:a1 ex:b1 ex:c1 .
+} ex:assertedBy <http://localhost:3000/> .

@@ -33,11 +33,11 @@ async function main() {
     const result = await reason(store);
 
     if (!isomorphic(result, [...resultStore])) {
+      console.error(`Failed on ${query}`);
       console.error('=================', 'EXPECTED', '=================');
       console.error(await write([...resultStore], { prefixes, format: 'text/n3' }));
       console.error('=================', 'RECIEVED', '=================');
       console.error(await write(result, { prefixes, format: 'text/n3' }));
-      console.error(`Failed on ${query}`);
       process.exit(1);
     }
   }

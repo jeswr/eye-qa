@@ -7,5 +7,5 @@
 {
     ?entity ex:asserts <<?s ?p ?o>> .
 } <= {
-    [ log:includes { ?s ?p ?o } ] ex:assertedBy <http://localhost:3000/> .
+    [ log:includes { ?s ?p ?o } ] ex:assertedBy ?entity .
 } .

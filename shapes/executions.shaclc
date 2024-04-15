@@ -19,7 +19,7 @@ shape ex:RDFCHashExectionShape -> fno:Execution {
 
 shape ex:SignatureValidationExectionShape -> fno:Execution {
     fno:executes hasValue=ex:signatureValidation [1..1] .
-    ex:contents BlankNode [1..1] .
+    ex:hash xsd:string [1..1] .
     cert:key xsd:string [1..1] .
     ex:signature xsd:string [1..1] .
 }

@@ -15,5 +15,5 @@
 
     ?issuer cert:key ?pubKey .
 
-    @ex:SignatureValidationExectionShape(ex:signature ?signature, cert:key ?pubKey, ex:contents ?dataset) log:graphAskSingleOutput { log:result log:is true . } .
+    @ex:SignatureValidationExectionShape(ex:signature ?signature, cert:key ?pubKey, ex:hash ?hash) log:graphAskSingleOutput true .
 } .

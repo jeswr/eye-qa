@@ -1,4 +1,4 @@
 @prefix ex: <http://example.org/> .
 @prefix cert: <http://www.w3.org/ns/auth/cert#> .
 
-ex:result ex:is <<<http://localhost:3000/> cert:key "key-1">>, << <http://localhost:3000/> ex:b ex:c >> .
+ex:result ex:is <<<http://localhost:3000/> cert:key "BGxATV0qAzWy4YDIqGIKbKYBbSn44eIVWzoXS6etwi995r+AeHkiT9/qqju9mAgg+BXdSqvYNuTgcNnUbBIKVXpqJPw5xtB5AknIsRV1sNU01+u1ZGGRyiNdy+Bok0jhGQ==">>, << <http://localhost:3000/> ex:b ex:c >> .

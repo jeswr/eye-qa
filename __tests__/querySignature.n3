@@ -5,7 +5,12 @@
 {
     ex:a ex:b ex:c .
     ex:a1 ex:b1 ex:c1 .
-} ex:signature [ ex:issuer <http://localhost:3000/> ; ex:signatureValue "abc123" ] .
+} ex:signature [ ex:issuer <http://localhost:3000/> ; ex:signatureValue "1WJ/RZo7D6l5OzSs+9URfyDJC41E0twz0TrFGPMKtmMcR6voBJUghUgHk1Nxm1MOpiutnq/zpND6rr9j27zXtLsSSSveRw4R532D+JAzA959OeXSDbUQVg2YVTeCrYyN" ] .
+
+{
+    ex:this ex:a ex:lie .
+} ex:signature [ ex:issuer <http://localhost:3000/> ; ex:signatureValue "1WJ/RZo7D6l5OzSs+9URfyDJC41E0twz0TrFGPMKtmMcR6voBJUghUgHk1Nxm1MOpiutnq/zpND6rr9j27zXtLsSSSveRw4R532D+JAzA959OeXSDbUQVg2YVTeCrYyN" ] .
+
 
 {
     ?dataset ex:assertedBy ?issuer .

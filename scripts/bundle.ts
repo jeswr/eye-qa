@@ -5,6 +5,8 @@ import { Store, DataFactory, Quad_Predicate } from 'n3';
 import { rdf } from 'rdf-namespaces';
 import { write } from '@jeswr/pretty-turtle';
 import { v4 } from 'uuid';
+// @ts-ignore
+import { double } from 'quote-unquote';
 const { namedNode, quad, variable } =  DataFactory;
 
 let i = 0;
@@ -93,7 +95,7 @@ async function main() {
         isImpliedBy: true,
     });
 
-    fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default "${rules}"`);
+    fs.writeFileSync(path.join(__dirname, '..', 'lib', 'rules', 'rules.ts'), `export default ${double(rules)}`);
     // FINISH GENERATE A TYPESCRIPT CONSTANT WITH ALL n3
 
     // Remove temporary n3 files

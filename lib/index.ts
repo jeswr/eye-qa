@@ -44,6 +44,7 @@ export async function reason(query: Iterable<Quad>) {
         quad(namedNode('http://www.w3.org/2000/10/swap/log#result'), namedNode('http://www.w3.org/2000/10/swap/log#is'), literal('true', namedNode('http://www.w3.org/2001/XMLSchema#boolean'))),
       ] : []);
     },
+    // TODO: Add a VC handler based on https://github.com/jeswr/phd-language-dialogue-experiment/blob/2d90c726b2d23859f10b8a782d228b201e4d1767/playground/testVc4.ts#L88
   );
 
   // For some reason that I dont want to debug right now the

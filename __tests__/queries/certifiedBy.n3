@@ -1,0 +1,69 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix ex: <http://example.org/> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+# # {
+# #     <http://localhost:3000/> ex:endorses <http://localhost:3005/>
+# # } ex:signature [ ex:issuer <http://localhost:3000/> ; ex:signatureValue "w8MBorbbNAGl4hIVaapAG9ExOisrf3CP0h/U1E1rQFNU0ZQSSeLeYLgFs3pMwm9xYWT7oKzEk1Mh3/NGNdzPOK2D6mjulYjBtLk04nA+IQYRqRl/OY3cjjyxReUG9VPs" ] .
+
+
+# # {
+# #     ex:sky ex:is ex:blue .
+# # } ex:signature [ ex:issuer <http://localhost:3005/> ; ex:signatureValue "h4BDy1IQ9Y2gGH/Gq/QexWYwngSl3Kn9QeA1otRGvU3hBLl9BBPsfdgTCpWXZV3ktgPNMK5gQwL54zEjFgxI8PJ38C/PaWBvXGBMWw23edCy5xtZfFIxwEMYpYDVZN9u" ] .
+
+# <http://localhost:3000/> ex:asserts << <http://localhost:3000/> ex:endorses <http://localhost:3005/> >> .
+# <http://localhost:3005/> ex:asserts << ex:sky ex:is ex:blue >> .
+
+# # {
+# #     ?entity ex:believes <<?s ?p ?o>> .
+# # } <= {
+#     # ?entity ex:trusts ?p .
+#     # ?p ex:asserts <<?s ?p ?o>> .
+# # } .
+
+# {
+#     ?entity ex:trusts ?pty .
+#     ?pty ex:asserts <<?s ?p ?o>> .
+# } => {
+#     ?entity ex:believes <<?s ?p ?o>> .
+# } .
+
+# {
+#     ?entity ex:trusts ?pty .
+#     ?pty ex:endorses ?pt2 .
+# } => {
+#     ?entity ex:trusts ?pt2 .
+# } .
+
+
+# {
+#     # ?s ?p ?o .
+#     ex:me ex:believes <<?s ?p ?o>> .
+# } => {
+#     # ex:me ex:believes <<?s ?p ?o>> .
+#     ?s ?p ?o .
+# } .
+
+# ex:me ex:trusts <http://localhost:3000/> .
+
+# {
+#     ?entity ex:trusts ?y .
+# } <= {
+#     ?entity!ex:trusts ex:endorses ?y .
+# } .
+
+# @prefix ex: <http://example.org/> .
+# ex:me ex:trusts <http://localhost:3000/> .
+
+# {
+#     ?entity ex:trusts ?y .
+# } <= {
+#     ?entity ex:trusts ?t .
+#     ?t ex:endorses ?y .
+# } .
+
+# {
+#     ex:me ex:trusts ?beliefs .
+# } log:query {
+#     ex:me ex:trusts ?beliefs
+# } .

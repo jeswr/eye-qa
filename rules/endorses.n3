@@ -1,0 +1,9 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix ex: <http://example.org/> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+{
+    ?entity ex:trusts ?y .
+} <= {
+    ?entity!ex:trusts ex:endorses ?y .
+} .

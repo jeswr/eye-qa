@@ -1,0 +1,11 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix ex: <http://example.org/> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+# Somewhat hacky to test going between named graphs and RDF-star
+
+{
+    ?entity ex:believes <<?s ?p ?o>> .
+} <= {
+    ?entity!ex:trusts ex:asserts <<?s ?p ?o>> .
+} .

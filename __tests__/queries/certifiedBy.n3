@@ -2,19 +2,19 @@
 @prefix ex: <http://example.org/> .
 @prefix cert: <http://www.w3.org/ns/auth/cert#> .
 
-# # {
-# #     <http://localhost:3000/> ex:endorses <http://localhost:3005/>
-# # } ex:signature [ ex:issuer <http://localhost:3000/> ; ex:signatureValue "w8MBorbbNAGl4hIVaapAG9ExOisrf3CP0h/U1E1rQFNU0ZQSSeLeYLgFs3pMwm9xYWT7oKzEk1Mh3/NGNdzPOK2D6mjulYjBtLk04nA+IQYRqRl/OY3cjjyxReUG9VPs" ] .
+# {
+#     <http://localhost:3000/> ex:endorses <http://localhost:3005/>
+# } ex:signature [ ex:issuer <http://localhost:3000/> ; ex:signatureValue "w8MBorbbNAGl4hIVaapAG9ExOisrf3CP0h/U1E1rQFNU0ZQSSeLeYLgFs3pMwm9xYWT7oKzEk1Mh3/NGNdzPOK2D6mjulYjBtLk04nA+IQYRqRl/OY3cjjyxReUG9VPs" ] .
 
 
-# # {
-# #     ex:sky ex:is ex:blue .
-# # } ex:signature [ ex:issuer <http://localhost:3005/> ; ex:signatureValue "h4BDy1IQ9Y2gGH/Gq/QexWYwngSl3Kn9QeA1otRGvU3hBLl9BBPsfdgTCpWXZV3ktgPNMK5gQwL54zEjFgxI8PJ38C/PaWBvXGBMWw23edCy5xtZfFIxwEMYpYDVZN9u" ] .
+# {
+#     ex:sky ex:is ex:blue .
+# } ex:signature [ ex:issuer <http://localhost:3005/> ; ex:signatureValue "h4BDy1IQ9Y2gGH/Gq/QexWYwngSl3Kn9QeA1otRGvU3hBLl9BBPsfdgTCpWXZV3ktgPNMK5gQwL54zEjFgxI8PJ38C/PaWBvXGBMWw23edCy5xtZfFIxwEMYpYDVZN9u" ] .
 
 # <http://localhost:3000/> ex:asserts << <http://localhost:3000/> ex:endorses <http://localhost:3005/> >> .
 # <http://localhost:3005/> ex:asserts << ex:sky ex:is ex:blue >> .
 
-# # {
+# {
 # #     ?entity ex:believes <<?s ?p ?o>> .
 # # } <= {
 #     # ?entity ex:trusts ?p .

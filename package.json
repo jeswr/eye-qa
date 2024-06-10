@@ -115,6 +115,6 @@
     "rdf-namespaces": "^1.12.0",
     "readable-stream": "^4.5.2",
     "slashes": "^3.0.12",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   }
 }

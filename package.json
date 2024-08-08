@@ -43,7 +43,7 @@
     "@types/n3": "^1.16.4",
     "@types/rdfjs__term-set": "^2.0.9",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
     "@typescript-eslint/parser": "^7.7.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
